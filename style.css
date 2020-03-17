@@ -1,0 +1,17 @@
+.menunav
+{
+    background-color: grey;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.explorator
+{
+    background-color: honeydew;
+}
+
+a
+{
+    text-decoration: none;
+}
