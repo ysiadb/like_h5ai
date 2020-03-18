@@ -57,7 +57,7 @@
                 
                 for ($i = 0 ; $i < sizeof($array); $i++)
                 {
-                    echo "<a href='explore.php'><li>". $array[$i] . PHP_EOL . "</li></a>"; 
+                    echo "<a href='index.php?folder=$path_directory'><li>". $array[$i] . PHP_EOL . "</li></a>"; 
                 }
                 
                 ?>
@@ -77,7 +77,7 @@
 <!-- <?php 
 // ================ SCANDIR ================
 
-$path_directory = "/home/wac/daisyB-repo";
+$path_directory = "/home/wac/daisyB-repo/tweet_academie/Daisy";
     
     $dir = basename($path_directory);
     echo "<h3>/".$dir."</h3>";
@@ -106,7 +106,7 @@ function scan($select)
 }
 
 
-?> -->
-
+?>
+-->
 </body>
 </html>
