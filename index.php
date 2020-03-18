@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet"> 
 
     <!-- MOBILE SPECIFIC METAS 
     ______________________________-->
@@ -41,23 +42,23 @@
         </div>
         <div class="row">
             <div>
-                <?php echo $path_directory ?>
+                <?php $path_directory = "/home/wac/daisyB-repo/";
+                echo $path_directory ?>
             </div>
         </div>
     </section>
 </header>
 <div class="row">
-    <section class="container-fluid">
+    <section class="container-fluid main">
         <section class="col-3 menunav">
                 <!-- AFFICHE TOUS LES DOSSIERS COURANTS -->
                 <?php
-                $path_directory = "/home/wac/daisyB-repo/";
                 $array = scandir($path_directory);
                 // var_dump($array);
                 
                 for ($i = 0 ; $i < sizeof($array); $i++)
                 {
-                    echo "<a href='index.php?folder=$path_directory'><li>". $array[$i] . PHP_EOL . "</li></a>"; 
+                    echo "<a href='index.php?folder='><li>". $array[$i] . PHP_EOL . "</li></a>"; 
                 }
                 
                 ?>

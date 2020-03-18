@@ -1,6 +1,11 @@
+html
+{
+    font-family: Sen sans-serif;
+}
+
 .menunav
 {
-    background-color: grey;
+    background-color: rgb(230, 230, 230);
     list-style: none;
     padding: 10px;
     margin: 0;
@@ -14,4 +19,15 @@
 a
 {
     text-decoration: none;
+    font-family: Sen ;
+}
+
+h1
+{
+    font-family: Sen;
+}
+
+.main
+{
+    border: 1px solid black;
 }
