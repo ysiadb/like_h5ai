@@ -40,11 +40,12 @@
                 <h1>My_H5ai</h1>
             </div>    
         </div>
-        <div class="row">
-            <div>
-                <?php $path_directory = "/home/wac/daisyB-repo/";
-                echo $path_directory ?>
-            </div>
+        <div class="row path">
+                <?php 
+                $path_directory = "/home/wac/daisyB-repo/";
+                $display_path = str_replace('/',' > ', $path_directory);          
+                echo $display_path ;
+                ?>
         </div>
     </section>
 </header>
