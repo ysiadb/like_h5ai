@@ -54,14 +54,114 @@
         <section class="col-3 menunav">
                 <!-- AFFICHE TOUS LES DOSSIERS COURANTS -->
                 <?php
-                $array = scandir($path_directory);
-                // var_dump($array);
-                
-                for ($i = 0 ; $i < sizeof($array); $i++)
+
+                function list_dir($dir)
                 {
-                    echo "<a href='index.php?folder='><li>". $array[$i] . PHP_EOL . "</li></a>"; 
-                }
+                    var_dump(scandir($dir));
+                    foreach(scandir($dir) as $filename)
+                    {
+                        
+                        if($filename[0] === '.') continue;
+
+                        $filepath = $dir.'/'.$filename;
+
+                        // echo "<a href=''><li>". $filename. "</li></a>".PHP_EOL; 
+
+                        if(is_dir($filepath))
+                        {
+                            echo "<a href=''><li>". $filename. "</li></a>".PHP_EOL; 
+                            echo "OK IS DIR";
+                        }
+
+
+
+                            if(is_file($filepath))
+                            {
+
+                                echo "<a href=''><ul>". $filename. "</ul></a>".PHP_EOL; 
+                            }
+                            foreach(list_dir($filepath) as $childFilename)
+                            {
+
+                                // echo "OK CHILDFILENAME";
+                                // while (list_dir($childFilename, $level+2) && !in_array($childFilename, array(".", "..")))
+                                // {
+                                //     echo "OK IS FILE AND IS IN ARRAY";
+                                //     for($i = 1; $i <= 4*$level; $i++)
+                                //     {
+                                //     echo "-----";
+                                //     } 
+                                //     list_dir($childFilename, $level+1);
+                                // }
+                                // // echo "<a href=''>". $childFilename . "</a>".PHP_EOL;
+                               
+                            }
+                        }
+                    }
                 
+
+                list_dir("/home/wac/Documents")
+
+
+                // function list_dir($name, $level=0)
+                // {
+                //     // $array = scandir($name);
+                    
+                //     if ($dir = opendir($name))
+                //     {
+                //         while ($file = readdir($dir))
+                //         {
+                //             for($i=1; $i<= 4*$level; $i++)
+                //             {
+                //                 echo "&nbsp;";
+                //             }
+                //             echo "$file<br>".PHP_EOL;
+
+                //             if(is_dir($file) && !in_array($file, array(".", "..")))
+                //             {
+                //                 list_dir($file, $level+1);
+                //             }
+                            
+                //         }
+                //         closedir($dir);
+                //     }
+                    
+                // }
+
+                // list_dir("/home/wac/Documents");
+                
+                // $array = scandir($path_directory);
+                // // var_dump($array);
+                
+                // for ($i = 0 ; $i < sizeof($array); $i++)
+                // {
+                //     echo "<a href='index.php?folder='><li>". $array[$i] . PHP_EOL . "</li></a>"; 
+                // }
+
+                // function list_dir($name, $level=0)
+                
+                // {
+                //     if ($current = opendir($name))
+                //     {
+                //         while ($folder = readdir($current))
+                //         {
+                //             for($i=1; $i<= (4*$level); $i++)
+                //             {
+                //                 echo "&nbsp;";
+                //             }
+                //             echo "$folder<br>".PHP_EOL;
+
+                //             if(is_dir($folder) && !in_array($folder, array(".", "..")))
+                //             {
+                //                 list_dir($folder, $level+1);
+                //             }
+                //         }
+                //         closedir($current);
+                //     }
+                // }
+                
+                // list_dir(".");
+
                 ?>
         </section>
     
