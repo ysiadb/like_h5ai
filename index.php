@@ -57,7 +57,6 @@
 
                 function list_dir($dir)
                 {
-                    var_dump(scandir($dir));
                     foreach(scandir($dir) as $filename)
                     {
                         
@@ -78,7 +77,11 @@
                             if(is_file($filepath))
                             {
 
-                                echo "<a href=''><ul>". $filename. "</ul></a>".PHP_EOL; 
+                                echo "<a href='index.php?=readfile()'><ul>". $filename. "</ul></a>".PHP_EOL; 
+
+                                // $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
+                                // echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
+                                // fclose($fp);
                             }
                             foreach(list_dir($filepath) as $childFilename)
                             {
@@ -98,7 +101,14 @@
                             }
                         }
                     }
-                
+
+                    function readfile($filepath)
+                    {
+                        $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
+                                    echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
+                                    fclose($fp);
+                    }
+    
 
                 list_dir("/home/wac/Documents")
 
