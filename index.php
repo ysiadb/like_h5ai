@@ -34,29 +34,42 @@
 <body>
 
 <header>
-    <section class="container-fluid">
+    <section class="container">
         <div class="row">
             <div class="header">
                 <h1>My_H5ai</h1>
             </div>    
         </div>
         <div class="row path">
-                <?php 
+                <div class="col-6">
+
+                    <?php 
+                $host = $_SERVER['HTTP_HOST'];
+                // echo $_SERVER['REQUEST_URI'];
                 $path_directory = "/home/wac/daisyB-repo/";
                 $display_path = str_replace('/',' > ', $path_directory);          
                 echo $display_path ;
-                ?>
+                
+                // echo htmlentities($_GET['coucou']); sécurise les donnees recoltees. ou $coucou = htmlentities($_GET['coucou']);
+            echo  '</div>
+            
+            <form class="col-6 search" action="index.php" method="get">
+                <input type="text" name="folder" id="search">
+                <input type="submit" value="Envoyer">
+            </form>
         </div>
     </section>
 </header>
-<div class="row">
-    <section class="container-fluid main">
-        <section class="col-3 menunav">
-                <!-- AFFICHE TOUS LES DOSSIERS COURANTS -->
-                <?php
+<section class="container main">
+    <div class="row">
+        <div class="col-3 menunav">
+            <!-- AFFICHE TOUS LES DOSSIERS COURANTS -->
+            <div class="col-12">';
 
                 function list_dir($dir)
                 {
+                    // echo basename($dir);
+
                     foreach(scandir($dir) as $filename)
                     {
                         
@@ -68,21 +81,19 @@
 
                         if(is_dir($filepath))
                         {
-                            echo "<a href=''><li>". $filename. "</li></a>".PHP_EOL; 
-                            echo "OK IS DIR";
+                            echo "<a href='index.php?folder=".$filename."'><li>". $filename. "</li></a>".PHP_EOL;  
+                            // echo "OK IS A DIR";
                         }
-
-
-
-                            if(is_file($filepath))
-                            {
-
-                                echo "<a href='index.php?=readfile()'><ul>". $filename. "</ul></a>".PHP_EOL; 
+                        if(is_file($filepath))
+                        {
+                            // $taille = filesize($filepath);
+                            echo "<a href='index.php?file=".$filename."'><ul>". $filename. "</ul></a>".PHP_EOL;
+                            // echo $taille . " bytes" ;
 
                                 // $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
                                 // echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
                                 // fclose($fp);
-                            }
+                        }
                             foreach(list_dir($filepath) as $childFilename)
                             {
 
@@ -102,15 +113,9 @@
                         }
                     }
 
-                    function readfile($filepath)
-                    {
-                        $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
-                                    echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
-                                    fclose($fp);
-                    }
     
 
-                list_dir("/home/wac/Documents")
+                list_dir("/home/wac/Documents");
 
 
                 // function list_dir($name, $level=0)
@@ -136,6 +141,7 @@
                 //         closedir($dir);
                 //     }
                     
+               
                 // }
 
                 // list_dir("/home/wac/Documents");
@@ -172,13 +178,44 @@
                 
                 // list_dir(".");
 
-                ?>
-        </section>
+               echo '</div>
+                </div>
     
-    <section class="col-9 explorator">
+        <div class="col-9 explorator">
+        <div class="container-fluid">
+             <div class="row">
+                <div class="col-12">'; 
+                echo "> <a href=''>". basename($_GET['folder']) . "</a>";
+                
+                echo '</div>
             <!-- AFFICHE LE CONTENU DU DOSSIER SELECTIONNE -->
+';
+          
+
+                echo "<table class='col-12'><tr id='explo'><th class = 'col-8 '>Nom</th><th class='col-2 taille'>Taille</th><th class='col-2'>Dernières modifications</th></tr>";
+                
+                $filepath = "/home/wac/Documents/CR/";
+
+                echo "<tr><td class='col-8'><a href='$filepath'>". basename($filepath) ."</a></td>";
+                echo "<td class='col-2 table_data'>" . filesize($filepath) . " bytes</td>";
+                echo "<td class='col-2 table_data'>" . date('F d Y, H:i', filemtime($filepath)) . "</td></tr>";
+                
+                // AFFICHE PREVIEW FICHIER
+                // if(isset($_GET['file']) || is_file($filepath))
+                // {
+                //     $preview = fopen($filepath, "r") or die("Vous n'avez pas les droits");
+                //     echo fread($preview, filesize($filepath));
+                //     fclose($preview);
+                //     // echo "OK";
+                // }
+                
+                echo "</table>"
+        
+            ?>
+
+        </div>
+    </div>
     </section>
-</div>
 
 </section>
 

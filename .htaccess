@@ -1,10 +1,9 @@
-<files .htaccess>
-order allow,deny
-deny from all
-</files>
+RewriteEngine On
 
-<files index.php>
-order allow,deny
-deny from all
-</files>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !.jpg$ [NC]
+
+RewriteCond %{REQUEST_URI} !.jpeg$ [NC]
+RewriteCond %{REQUEST_URI} !.png$ [NC]
+RewriteRule (.*) index.php
 

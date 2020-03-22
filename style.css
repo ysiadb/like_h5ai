@@ -4,16 +4,17 @@ html
 }
 
 .menunav
-{
-    background-color: rgb(230, 230, 230);
+{   
+     background-color: honeydew;
+
     list-style: none;
-    padding: 10px;
     margin: 0;
 }
 
 .explorator
 {
-    background-color: honeydew;
+    padding: 15px;
+
 }
 
 a
@@ -36,4 +37,22 @@ h1
 {
     border: 1px solid grey;
     padding: 2%;
+}
+
+.search
+{
+    text-align: right;
+}
+
+#explo
+{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    background-color: rgb(233, 233, 233);
+}
+
+.taille
+{
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
 }
