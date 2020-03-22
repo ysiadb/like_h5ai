@@ -81,7 +81,9 @@
                         {
                             
                             global $filepath;
-                            $filepath = preg_grep('/^([^.])/',glob($dir."*", GLOB_MARK));
+                            // $filepath = preg_grep('/^([^.])/',glob($dir."*", GLOB_MARK));
+                            $filepath = glob($dir."*", GLOB_MARK);
+
                             echo "<span><a href='index.php?folder=" . basename($filename) . "'><img id='icon' src='/icon/folder.png'><ul>" . basename($filename) . "</ul></a></span>" . PHP_EOL;
 
                             // var_dump($filepath);
@@ -94,7 +96,9 @@
                         }
                         // var_dump($filename);
                     }
-                    list_dir("/home/wac/Documents");
+                    global $path;
+                    $path = "/home/wac/Documents";
+                    list_dir($path);
 
 
                         echo '
@@ -120,39 +124,73 @@
 
                         
 
-                        echo "<ul>";
-                        if (isset($_GET['folder']) === $filepath) 
-                        {
-                        foreach ($filepath as $filename) 
-                        {
-                            list_dir($filename);                           
-                            // echo "<a href=''><li>". $filename. "</li></a>".PHP_EOL; 
+            echo "<ul>";
+            $test = explode("=", $url);
+            $test2 = $path."/".$test[1];
+            var_dump($test2);
 
-                            if(is_dir($filename))
+                    function list_url($test2)
+                    {
+                        if(file_exists($test2))
+                        {
+                            echo "exist";
+
+                            if(is_dir($test2))
                             {
+                                $filepath = glob($test2."*", GLOB_MARK);
 
-                                    echo "<tr><td class='col-6'><a href='index.php?folder=" . $filename . "'><li>" . $filename . "</li></a></td>" . PHP_EOL;
-                                    echo "<td class='col-2 table_data'>" . filesize($filepath) . " bytes</td>";
-                                    echo "<td class='col-4 table_data'>" .  date(' d / m / y , H:i', filemtime($filepath)) . "</td></tr>";
-                                    
-                                    
-                                    // echo "OK IS A DIR";
-                                }
                                 
-                                if (is_file($filename)) {
-                                    // $taille = filesize($filepath);
-                                    echo "<tr><td class='col-6'><a href='index.php?file=" . basename($filename) . "'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
-                                    echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
-                                    echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
+                                foreach ($filepath as $filename) 
+                                {
+                                    list_url($filename);                           
+                                    // echo "<a href=''><li>". $filename. "</li></a>".PHP_EOL; 
                                     
-                                    // echo $taille . " bytes" ;
+                                    if(is_dir($filename))
+                                    {
+                                        
+                                        echo "<tr><td class='col-6'><a href='index.php?folder=" . $filename . "'><li>" . $filename . "</li></a></td>" . PHP_EOL;
+                                        echo "<td class='col-2 table_data'>" . filesize($filepath) . " bytes</td>";
+                                        echo "<td class='col-4 table_data'>" .  date(' d / m / y , H:i', filemtime($filepath)) . "</td></tr>";
+                                        
+                                        
+                                        // echo "OK IS A DIR";
+                                    }
                                     
-                                    // $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
-                                    // echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
-                                    // fclose($fp);
+                                    if (is_file($filename)) {
+                                        // $taille = filesize($filepath);
+                                        echo "<tr><td class='col-6'><a href='index.php?file=" . basename($filename) . "'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
+                                        echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
+                                        echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
+                                        
+                                        // echo $taille . " bytes" ;
+                                        
+                                        // $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
+                                        // echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
+                                        // fclose($fp);
+                                    }
                                 }
                             }
+                        }
+                    }
+                    list_url($test2);
+
+                    function preview($test2)
+                    {
+                        if(file_exists($test2))
+                        {
+                            echo "le fichier existe";
+                            
+                            if(is_file($test2))
+                            {
+                                $preview = fopen($test2, "r") or die("Vous n'avez pas les droits");
+                                echo fread($preview, filesize($test2));
+                                 fclose($preview);
                             }
+                        }
+                    }
+
+                    preview($test2);
+                            
 
 
                         echo "</ul></table>";
