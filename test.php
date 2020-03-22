@@ -84,3 +84,106 @@ function arborescence($fichier, $link, $chemin) {
 }
 
 arborescence($test, $lien, $test);
+
+
+
+// ================ SCANDIR ================
+
+$path_directory = "/home/wac/daisyB-repo/tweet_academie/Daisy";
+    
+    $dir = basename($path_directory);
+    echo "<h3>/".$dir."</h3>";
+    
+    $array = scandir($path_directory);
+    // var_dump($array);
+    
+    for ($i = 0 ; $i < sizeof($array); $i++)
+    {
+        echo "<li><a>". $array[$i] . "</a></li>"; 
+    }
+
+function scan($select)
+{
+
+    $path_directory = $select;
+
+
+    $array = scandir($path_directory);
+    // var_dump($array);
+    
+    for ($i = 0 ; $i < sizeof($array); $i++)
+    {
+        echo "<li><a>". $array[$i] . "</a></li>"; 
+    }
+}
+
+
+                // function list_dir($name, $level=0)
+                // {
+                //     // $array = scandir($name);
+                    
+                //     if ($dir = opendir($name))
+                //     {
+                //         while ($file = readdir($dir))
+                //         {
+                //             for($i=1; $i<= 4*$level; $i++)
+                //             {
+                //                 echo "&nbsp;";
+                //             }
+                //             echo "$file<br>".PHP_EOL;
+
+                //             if(is_dir($file) && !in_array($file, array(".", "..")))
+                //             {
+                //                 list_dir($file, $level+1);
+                //             }
+                            
+                //         }
+                //         closedir($dir);
+                //     }
+                    
+               
+                // }
+
+                // list_dir("/home/wac/Documents");
+                
+                // $array = scandir($path_directory);
+                // // var_dump($array);
+                
+                // for ($i = 0 ; $i < sizeof($array); $i++)
+                // {
+                //     echo "<a href='index.php?folder='><li>". $array[$i] . PHP_EOL . "</li></a>"; 
+                // }
+
+                // function list_dir($name, $level=0)
+                
+                // {
+                //     if ($current = opendir($name))
+                //     {
+                //         while ($folder = readdir($current))
+                //         {
+                //             for($i=1; $i<= (4*$level); $i++)
+                //             {
+                //                 echo "&nbsp;";
+                //             }
+                //             echo "$folder<br>".PHP_EOL;
+
+                //             if(is_dir($folder) && !in_array($folder, array(".", "..")))
+                //             {
+                //                 list_dir($folder, $level+1);
+                //             }
+                //         }
+                //         closedir($current);
+                //     }
+                // }
+                
+                // list_dir(".");
+
+
+                  // AFFICHE PREVIEW FICHIER
+                // if(isset($_GET['file']) || is_file($filepath))
+                // {
+                //     $preview = fopen($filepath, "r") or die("Vous n'avez pas les droits");
+                //     echo fread($preview, filesize($filepath));
+                //     fclose($preview);
+                //     // echo "OK";
+                // }
