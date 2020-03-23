@@ -45,8 +45,10 @@
 
                     <?php
                     $host = $_SERVER['HTTP_HOST'];
+                    $uri = $_SERVER['REQUEST_URI'];
+                    $urii = explode("=", $uri);
                     // echo $_SERVER['REQUEST_URI'];
-                    $path_directory = "/home/wac/daisyB-repo/";
+                    $path_directory = $urii[1];
                     $display_path = str_replace('/', ' > ', $path_directory);
                     echo $display_path;
 
@@ -84,7 +86,7 @@
                             // $filepath = preg_grep('/^([^.])/',glob($dir."*", GLOB_MARK));
                             $filepath = glob($dir."*", GLOB_MARK);
 
-                            echo "<span><a href='index.php?folder=" . basename($filename) . "'><img id='icon' src='/icon/folder.png'><ul>" . basename($filename) . "</ul></a></span>" . PHP_EOL;
+                            echo "<span><a href='index.php?folder=" . $filename . "'><img id='icon' src='/icon/folder.png'><ul>" . basename($filename) . "</ul></a></span>" . PHP_EOL;
 
                             // var_dump($filepath);
 
@@ -126,18 +128,18 @@
 
             echo "<ul>";
             $test = explode("=", $url);
+            global $test, $test2, $test;
             $test2 = $path."/".$test[1];
-            var_dump($test2);
+            $test3 = $test[1];
+            // var_dump($test3);
 
-                    function list_url($test2)
+                    function list_url($test3)
                     {
-                        if(file_exists($test2))
+                        if(file_exists($test3))
                         {
-                            echo "exist";
-
-                            if(is_dir($test2))
+                            if(is_dir($test3))
                             {
-                                $filepath = glob($test2."*", GLOB_MARK);
+                                $filepath = glob($test3."*", GLOB_MARK);
 
                                 
                                 foreach ($filepath as $filename) 
@@ -148,7 +150,7 @@
                                     if(is_dir($filename))
                                     {
                                         
-                                        echo "<tr><td class='col-6'><a href='index.php?folder=" . $filename . "'><li>" . $filename . "</li></a></td>" . PHP_EOL;
+                                        echo "<tr><td class='col-6'><a href='index.php?folder=" . $filepath . "'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
                                         echo "<td class='col-2 table_data'>" . filesize($filepath) . " bytes</td>";
                                         echo "<td class='col-4 table_data'>" .  date(' d / m / y , H:i', filemtime($filepath)) . "</td></tr>";
                                         
@@ -157,11 +159,32 @@
                                     }
                                     
                                     if (is_file($filename)) {
-                                        // $taille = filesize($filepath);
-                                        echo "<tr><td class='col-6'><a href='index.php?file=" . basename($filename) . "'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
-                                        echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
-                                        echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
+                                        $pathinfo = pathinfo($filename);
+
+                                        if($pathinfo['extension'] === "jpg")
+                                        {
+
+                                            // $taille = filesize($filepath);
+                                            echo "<tr><td class='col-6'><a href='index.php?file=" . $test3. basename($filename) . "'><img id='icon'src='/icon/jpg.png'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
+                                            echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
+                                            echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
+                                        }
                                         
+                                        if($pathinfo['extension'] === "png")
+                                        {
+
+                                            // $taille = filesize($filepath);
+                                            echo "<tr><td class='col-6'><a href='index.php?file=" . $test3. basename($filename) . "'><img id='icon'src='/icon/png.png'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
+                                            echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
+                                            echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
+                                            
+                                        }
+                                        else
+                                        {
+                                            echo "<tr><td class='col-6'><a href='index.php?file=" . $test3. basename($filename) . "'><img id='icon'src='/icon/html.png'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
+                                            echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
+                                            echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
+                                        }
                                         // echo $taille . " bytes" ;
                                         
                                         // $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
@@ -172,28 +195,28 @@
                             }
                         }
                     }
-                    list_url($test2);
+                    list_url($test3);
 
-                    function preview($test2)
-                    {
-                        if(file_exists($test2))
-                        {
-                            echo "le fichier existe";
-                            
-                            if(is_file($test2))
-                            {
-                                $preview = fopen($test2, "r") or die("Vous n'avez pas les droits");
-                                echo fread($preview, filesize($test2));
-                                 fclose($preview);
-                            }
-                        }
-                    }
-
-                    preview($test2);
-                            
-
-
+                    // function preview($test3)
+                    // {
+                        // }
+                        
+                        // preview($test3);
+                        
+                        
+                        
                         echo "</ul></table>";
+                        // var_dump($test);
+
+                        if(isset($_GET['file']))
+                        {
+                            echo "<h1>Aperçu :</h1>";
+                            
+                                $preview = fopen($test3, "r") or die("Vous n'avez pas les droits");
+                                echo "<div id='previewarea'class='container-fluid'>".fread($preview, filesize($test3)) . "</div>";
+                                fclose($preview);
+                        
+                        }
                     
 
 

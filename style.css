@@ -59,12 +59,19 @@ h1
 
 #icon
 {
-    width: 25px;
+    width: 30px;
     height: auto;
     float: left;
+    margin-right: 5px;
 }
 
 span
 {
     display: inline;
+}
+
+#previewarea
+{
+    border: 1px solid grey;
+    box-shadow: 0em 5px 3px grey;
 }
