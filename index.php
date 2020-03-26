@@ -44,6 +44,15 @@
                 <div class="col-6">
 
                     <?php
+                    try
+                    {
+                       $bdd = new PDO('mysql:host=localhost;dbname=;charset=utf8', 'root', 'HelloRoot');
+                    }
+                    catch (Exception $e)
+                    {
+                        die('Erreur : ' . $e->getMessage());
+                    }
+                
                     $host = $_SERVER['HTTP_HOST'];
                     $uri = $_SERVER['REQUEST_URI'];
                     $urii = explode("=", $uri);
@@ -186,23 +195,13 @@
                                             echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
                                         }
                                         // echo $taille . " bytes" ;
-                                        
-                                        // $fp = fopen($filepath, "r") or die("Vous n'avez pas les droits");
-                                        // echo "<div class='preview'>" . fread($fp, filesize($filepath)) . "</div>";
-                                        // fclose($fp);
+                                    
                                     }
                                 }
                             }
                         }
                     }
                     list_url($test3);
-
-                    // function preview($test3)
-                    // {
-                        // }
-                        
-                        // preview($test3);
-                        
                         
                         
                         echo "</ul></table>";
