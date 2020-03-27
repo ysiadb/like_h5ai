@@ -173,7 +173,6 @@
                                         if($pathinfo['extension'] === "jpg")
                                         {
 
-                                            // $taille = filesize($filepath);
                                             echo "<tr><td class='col-6'><a href='index.php?file=" . $test3. basename($filename) . "'><img id='icon'src='/icon/jpg.png'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
                                             echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
                                             echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
@@ -182,7 +181,6 @@
                                         if($pathinfo['extension'] === "png")
                                         {
 
-                                            // $taille = filesize($filepath);
                                             echo "<tr><td class='col-6'><a href='index.php?file=" . $test3. basename($filename) . "'><img id='icon'src='/icon/png.png'><li>" . basename($filename) . "</li></a></td>" . PHP_EOL;
                                             echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
                                             echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
@@ -194,7 +192,6 @@
                                             echo "<td class='col-2 table_data'>" . filesize($filename) . " bytes</td>";
                                             echo "<td class='col-4 table_data'>" . date(' d / m / y , H:i', filemtime($filename)) . "</td></tr>";
                                         }
-                                        // echo $taille . " bytes" ;
                                     
                                     }
                                 }
@@ -211,7 +208,7 @@
                         {
                             echo "<h1>Aperçu :</h1>";
                             
-                                $preview = fopen($test3, "r") or die("Vous n'avez pas les droits");
+                                $preview = fopen($test3, "r") or die(" Erreur ! Vous n'avez pas les droits");
                                 echo "<div id='previewarea'class='container-fluid'>".fread($preview, filesize($test3)) . "</div>";
                                 fclose($preview);
                         
