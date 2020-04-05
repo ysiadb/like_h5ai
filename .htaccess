@@ -5,5 +5,5 @@ RewriteCond %{REQUEST_URI} !.jpg$ [NC]
 
 RewriteCond %{REQUEST_URI} !.jpeg$ [NC]
 RewriteCond %{REQUEST_URI} !.png$ [NC]
-RewriteRule (.*) index.php
-
+RewriteRule ^test?$ index.php?
+RewriteRule ^folder/([a-z0-9/]+)$ folder=$1
