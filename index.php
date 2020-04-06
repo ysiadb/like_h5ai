@@ -45,27 +45,7 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                 <div class="col-6 header">
                     <h1>My_H5ai</h1>
                 </div>
-                <!-- <div class="col-6 perso">
-                    <form id="style" action="" method="post">
-                        <div><h6 style="font-family: Sen; text-align: center">Style</h6></div>
-                        <div id="perso">
-                            <img src="icon/folder.png" id="icon" style="filter: hue-rotate(60deg) grayscale(50%); border: 2px solid black">
-                            <input type="checkbox" value="1">
-                        </div>
-                        <div id="perso">
-                            <img src="icon/folder.png" id="icon" style="filter: hue-rotate(10deg); border: 2px solid red">
-                            <input type="checkbox" value="2">
-                        </div>
-                        <div id="perso">
-                            <img src="icon/folder.png" id="icon" style="filter: hue-rotate(240deg); border: 2px solid yellow">
-                            <input type="checkbox" value="3">
-                        </div>
-                        <div id="perso">
-                            <img src="icon/folder.png" id="icon" style="filter: hue-rotate(540deg); border: 2px solid yellow">
-                            <input type="checkbox" value="4">
-                        </div>
-                    </form>
-                </div> -->
+                
             </div>
             <div class="row path">
                 <div class="col-3 ">
@@ -100,8 +80,8 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                         <div class="col-6 search">
                             <form action="" method="post">
                                 <input type="text" placeholder="Rechercher ..."name="folder" id="search">
-                                <input type="submit" value="Go">
-                            </form>
+                                <button id="ok" type="submit">✔</button>
+                                </form>
                         </div>
                     
                     <div class="col-3 perso">
@@ -250,7 +230,7 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                             <input type='checkbox' name='tri[]' value='nom'> Nom</input>
                             <input type='checkbox' name='tri[]' value='taille'> Taille</input>
                             <input type='checkbox' name='tri[]' value='modification'> Modification</input>
-                            <input type='submit' value='Trier'>
+                            <button id='ok' type='submit'>✔</button>
                             </form>";
 
                     // var_dump($_POST);
@@ -262,10 +242,9 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                     echo "<div class='row'>
             <table class='col-12'>
                 <tr id='explo'>
-                    <th class = 'col-3 nom'>Nom</th>
-                    <th class='col-2 taille'>Taille</th>
+                    <th class = 'col-4 nom'>Nom</th>
+                    <th class='col-3 taille'>Taille</th>
                     <th class='col-5 modif'>Modifé le</th>
-                    <th class='col-2 tag' id=''>Tag</th>
                 </tr>
                             </div>";
 
@@ -332,30 +311,26 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                                         $chemin = $test3 .  $value['nom'];
 
                                         if (is_dir($chemin)) {
-                                            echo "<tr><td class='col-3'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                            echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                            echo "<tr><td class='col-4'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                            echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                             echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                            echo "<td class='col-2 table_data'>" . "</td></tr>";
                                         } else {
                                             if ($pathinfo['extension'] === "jpg") {
 
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" .  $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" .  $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             }
 
                                             if ($pathinfo['extension'] === "png") {
 
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" .  filesize($test3 . "/" .  $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" .  filesize($test3 . "/" .  $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" .  $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             } else {
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" .  $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             }
                                         }
                                     }
@@ -379,30 +354,26 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
 
 
                                         if (is_dir($chemin)) {
-                                            echo "<tr><td class='col-3'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                            echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                            echo "<tr><td class='col-4'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                            echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                             echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                            echo "<td class='col-2 table_data'>" . "</td></tr>";
                                         } else {
                                             if ($pathinfo['extension'] === "jpg") {
 
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             }
 
                                             if ($pathinfo['extension'] === "png") {
 
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" .  filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" .  filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             } else {
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             }
                                         }
                                     }
@@ -419,30 +390,26 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
 
 
                                         if (is_dir($chemin)) {
-                                            echo "<tr><td class='col-3'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                            echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                            echo "<tr><td class='col-4'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                            echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                             echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                            echo "<td class='col-2 table_data'>" . "</td></tr>";
                                         } else {
                                             if ($pathinfo['extension'] === "jpg") {
 
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             }
 
                                             if ($pathinfo['extension'] === "png") {
 
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" .  filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" .  filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             } else {
-                                                echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             }
                                         }
                                     }
@@ -456,30 +423,26 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                                             $chemin = $test3 . "/" . $value['nom'];
 
                                             if (is_dir($chemin)) {
-                                                echo "<tr><td class='col-3'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                echo "<tr><td class='col-4'><a href='index.php?folder=" . $test3 . $value['nom'] . "'><img id='icon'src='icon/folder.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                 echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                echo "<td class='col-2 table_data'>" . "</td></tr>";
                                             } else {
                                                 if ($pathinfo['extension'] === "jpg") {
 
-                                                    echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                    echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                    echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/jpg.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                    echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                     echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                    echo "<td class='col-2 table_data'>" . "</td></tr>";
                                                 }
 
                                                 if ($pathinfo['extension'] === "png") {
 
-                                                    echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                    echo "<td class='col-2 table_data'>" .  filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                    echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/png.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                    echo "<td class='col-3 table_data'>" .  filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                     echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                    echo "<td class='col-2 table_data'>" . "</td></tr>";
                                                 } else {
-                                                    echo "<tr><td class='col-3'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
-                                                    echo "<td class='col-2 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
+                                                    echo "<tr><td class='col-4'><a href='index.php?file=" . $test3 . "/". $value['nom'] . "'><img id='icon'src='icon/html.png'><li>" . basename($value['nom']) . "</li></a></td>" . PHP_EOL;
+                                                    echo "<td class='col-3 table_data'>" . filesize($test3 . "/" . $value['nom']) . " bytes</td>";
                                                     echo "<td class='col-5 table_data'>" . date(' d / m / y , H:i', filemtime($test3 . "/" . $value['nom'])) . "</td>";
-                                                    echo "<td class='col-2 table_data'>" . "</td></tr>";
                                                 }
                                             }
                                         }
@@ -491,23 +454,7 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
                     }
                     list_url($test3);
                     
-                    // $gettag = $bdd->query('SELECT * FROM fichiers');
-                    // $newchemin = str_replace('//', '/', $test3);
-
-
-                    // while($tag = $gettag->fetch())
-                    // {
-                    //     var_dump($tag['nom']);
-                    //     echo '       ok     ';
-                    //     var_dump($newchemin);
-                    //     echo "<td class='col-2 table_data'>" . $tag['tag']."</td></tr>";
-
-                    //     if($tag['nom'] == $newchemin)
-                    //     {
-                    //         echo "<td class='col-2 table_data'>" . $tag['tag']."</td></tr>";
-
-                    //     }
-                    // }
+                    
 
                     echo "</ul></table>";
                     // var_dump($test);
@@ -546,18 +493,15 @@ $_SESSION['historique'] = $_SERVER['HTTP_REFERER'];
 
                     while($tag = $gettag->fetch())
                     {
-                        // var_dump($tag['nom']);
-                        // echo '       ok     ';
-                        // var_dump($newchemin);
+                        
 
                         if($tag['nom'] == $newchemin)
                         {   
-                            echo "<a id='tagg'>#" . $tag['tag']."</a>  ";
+                            echo "<a href='' id='tagg'>#" . $tag['tag']."</a>  ";
 
                         }
                     }
                     echo "</div></div></div>";
-                    // var_dump($test3)
 
                     ?>
 
